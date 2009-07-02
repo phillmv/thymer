@@ -55,7 +55,7 @@ def invoice(date, end_date = nil)
     end
   }
   (end_date + 1).to_8601
-  File.open("foo.html", "w"){ |io| io.puts @template.render(Object.new, @variables) }
+  File.open("output/#{start_date.to_8601}_#{end_date.to_8601}.html", "w"){ |io| io.puts @template.render(Object.new, @variables) }
 
 end
 
