@@ -1,0 +1,61 @@
+body {
+  font-family: sans-serif; 
+
+}
+h1 {
+  text-align: center;
+  font-size: 50px;
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+#date{
+  margin-bottom: 40px;
+  text-align: center;
+
+}
+#from
+{
+  font-size: 20px;
+}
+
+#to
+{
+  font-size: 20px;
+}
+
+#name
+{
+  font-size: 45px;
+  font-weight: bold;
+  letter-spacing: -2px;
+}
+
+#contact
+{
+  margin-left: 3px;
+  font-size: 13px;
+}
+
+#period {
+  font-size: 18px;
+}
+
+#day{
+  font-size: 18px;
+  font-weight:bold;
+}
+
+#title{
+  font-size: 20px;
+  font-weight: bold;
+  border-bottom: 1px dotted;
+}
+
+#desc {
+  margin-top: 5px;
+}
+
+#time{
+  text-align: right;
+  margin-top: 5px;
+}
