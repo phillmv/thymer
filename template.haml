@@ -9,31 +9,36 @@
         %h1
           INVOICE
         #date
-          \#00001 • July 1, 2009
+          = "##{invoice_number}"
+          • 
+          = date
       .grid_9
         #from
           from:
         #name
-          Phillip Mendonça-Vieira
+          = name
         #contact
-          (416) 627-3393 • phillmv@okayfail.com • 42 Dubray Ave, M3K1V5 Toronto, ON
+          = contact 
       .grid_7
         #to
           to:
         #name
-          The Mark News
+          = client_name 
         #contact
-          192 Spadina Avenue, Suite 507, M5R2C2 Toronto, ON
+          = client_contact
 
       .grid_16
         %br/
         %br/
-        #period
-          from April 30, 2009 to May 13, 2009
-      #title.grid_12
+        #time_period
+          from 
+          %b= start_date
+          to
+          %b= end_date
+      #desc-title.grid_12
         %br/
         Description
-      #title.grid_2
+      #quantity-title.grid_2
         %br/
         Quantity
       .grid_16
@@ -43,7 +48,29 @@
       .grid_9
         #desc
           Set up, internet troubleshooting
-      .grid_3.prefix_2
+      .grid_3.prefix_3
         #time
-          4 hours
-      
+          4
+      .grid_9
+        #desc
+          Reading, setting things up
+      .grid_3.prefix_3
+        #time
+          6.5
+
+      #total.grid_12
+        .text
+          Total:
+          %br/
+          Unit cost:
+          %br/
+          Total cost:
+
+      #total.grid_2
+        .price
+          12
+          %br/
+          $25
+          %br/
+          $120000
+

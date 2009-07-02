@@ -7,6 +7,7 @@ h1 {
   font-size: 50px;
   font-weight: bold;
   margin-bottom: 0px;
+  letter-spacing: -3px;
 }
 #date{
   margin-bottom: 40px;
@@ -36,7 +37,7 @@ h1 {
   font-size: 13px;
 }
 
-#period {
+#time_period {
   font-size: 18px;
 }
 
@@ -45,10 +46,16 @@ h1 {
   font-weight:bold;
 }
 
-#title{
+#desc-title{
   font-size: 20px;
   font-weight: bold;
   border-bottom: 1px dotted;
+}
+#quantity-title{
+  font-size: 20px;
+  font-weight: bold;
+  border-bottom: 1px dotted;
+  text-align: center;
 }
 
 #desc {
@@ -56,6 +63,23 @@ h1 {
 }
 
 #time{
-  text-align: right;
+  text-align: left;
   margin-top: 5px;
+  padding-left: 45px;
+}
+
+#total{
+  margin-top: 10px;
+  border-top: 1px dotted;
+}
+
+#total .text {
+  margin-top: 10px;
+  text-align: right;
+  font-weight: bold;
+}
+
+#total .price {
+  margin-top: 10px;
+  padding-left: 45px;
 }
