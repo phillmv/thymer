@@ -65,7 +65,7 @@ h1 {
 #time{
   text-align: left;
   margin-top: 5px;
-  padding-left: 45px;
+  padding-left: 225px;
 }
 
 #total{
@@ -82,4 +82,9 @@ h1 {
 #total .price {
   margin-top: 10px;
   padding-left: 45px;
+}
+
+.container_16
+{
+  margin-left: 210px;
 }

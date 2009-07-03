@@ -1,7 +1,7 @@
 %html
   %head
-    <link rel="stylesheet" type="text/css" href="960.css" />
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="../960.css" />
+    <link rel="stylesheet" type="text/css" href="../style.css" />
   %body
 
     .container_16
@@ -41,22 +41,7 @@
       #quantity-title.grid_2
         %br/
         Quantity
-      .grid_16
-        %br/
-        #day
-          April 30
-      .grid_9
-        #desc
-          Set up, internet troubleshooting
-      .grid_3.prefix_3
-        #time
-          4
-      .grid_9
-        #desc
-          Reading, setting things up
-      .grid_3.prefix_3
-        #time
-          6.5
+      =render_days(days)
 
       #total.grid_12
         .text
@@ -68,9 +53,9 @@
 
       #total.grid_2
         .price
-          12
+          = total_hours
           %br/
-          $25
+          = "$#{unit_rate}"
           %br/
-          $120000
+          = "$#{total_hours * unit_rate}"
 
