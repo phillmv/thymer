@@ -47,15 +47,19 @@
         .text
           Total:
           %br/
-          Unit cost:
+          ="Units at $#{discount_unit_rate}:"
+          %br/
+          ="Units at $#{unit_rate}:"
           %br/
           Total cost:
 
       #total.grid_2
         .price
-          = total_hours
+          = total_seconds/3600.0
           %br/
-          = "$#{unit_rate}"
+          = "#{discount_seconds/3600.0}"
           %br/
-          = "$#{total_hours * unit_rate}"
+          = "#{regular_priced_seconds/3600.0}"
+          %br/
+          = "$#{total_cost/3600.0}"
 

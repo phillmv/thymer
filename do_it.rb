@@ -5,7 +5,7 @@ require 'extensions.rb'
 require 'config.rb'
 require 'sha1'
 
-calendars = Icalendar.parse(File.open('basic.ics'))
+calendars = Icalendar.parse(File.open('basic.ics.4'))
 cal = calendars.first
 
 @date_list = Hash.new()
@@ -45,7 +45,7 @@ def invoice(date, end_date = nil)
   @variables[:start_date] = start_date.to_english
   @variables[:end_date] = end_date.to_english
   @variables[:invoice_number] = @variables[:invoice_number].call
-  @variables[:total_hours] = 0
+  @variables[:total_seconds] = 0
   @variables[:days] = []
 
   (start_date..end_date).each { |d|
@@ -61,16 +61,24 @@ def invoice(date, end_date = nil)
 	t = Ticket.new
 	t.description = ticket
 
-	t.time = days_tickets[ticket]/3600.0
-	@variables[:total_hours] = @variables[:total_hours] + t.time
+	t.time = days_tickets[ticket]
+	@variables[:total_seconds] = @variables[:total_seconds] + t.time
 	day.tickets << t
       }
     end
   }
 
   @variables[:days].each { |d| puts d.date.to_english }
-  (end_date + 1).to_8601
+  
+  @variables[:regular_priced_seconds] = @variables[:total_seconds] - @variables[:discount_seconds]
+  @variables[:discount_cost] = @variables[:discount_unit_rate] * @variables[:discount_seconds]
+  puts "discout cost: #{@variables[:discount_cost]/3600}"
+  @variables[:total_cost] = @variables[:discount_cost] + (@variables[:regular_priced_seconds] * @variables[:unit_rate])
+  puts "total cost: #{ @variables[:total_cost]/3600}"
+
+
   File.open("output/#{start_date.to_8601}_#{end_date.to_8601}.html", "w"){ |io| io.puts @template.render(Object.new, @variables) }
+  puts (end_date+1).to_8601
 
 end
 
@@ -83,4 +91,6 @@ def render_days(days)
   return str
 end
 
-invoice("2009-04-30")
+#invoice("2009-04-30")
+invoice("2009-05-14")
+
