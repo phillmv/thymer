@@ -1,10 +1,11 @@
 = Thymer
 
-Thymer will convert specific date ranges in Google Calendar/ICS calendars to HTML invoices you can print. Take a look at sample_output.pdf for the default template.
+Thymer will convert specific date ranges in Google Calendar/ICS calendars to HTML invoices you can print. Take a look at output/sample_output.pdf for the default template.
 
 The code isn't very good; I'd like to make it into more idiosyncratic ruby.
 Oh and tests would be nice (oops). Lack of time, etc.
 I wrote this, but I still double check my results. You should too!
+
 Patches, bugs or ideas are welcome. 
 
 phillmv -at- okayfail.com
