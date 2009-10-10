@@ -1,3 +1,16 @@
+class Day
+  attr_writer :tickets, :date
+  attr_accessor :tickets, :date
+  def initialize
+    @tickets = []
+  end
+end
+
+class Ticket
+  attr_writer :description, :time
+  attr_reader :description, :time
+end
+
 class DateTime
   DATE_STR = '%Y-%m-%d'
   def to_8601

@@ -1,0 +1,45 @@
+= Thymer
+
+Thymer will convert specific date ranges in Google Calendar/ICS calendars to HTML invoices you can print.
+
+The code isn't very good; I'd like to make it into more idiosyncratic ruby.
+Oh and tests would be nice (oops). Lack of time, etc.
+
+I wrote this, but I still double check my results. You should too!
+
+Patches, bugs or ideas are welcome. 
+phillmv -at- okayfail.com
+
+== USAGE
+
+1. Keep track of your hours in Google Calendar. I usually click in hours worked and use the Summary (or 'What') field to refer to project/project section. At the moment only this field will be shown in your final invoice; in the future, if I ever have to be more detailed I might work in a use for the description field too.
+
+2. Rename sample_config.yaml to config.yaml and fill in the values in with the appropriate info. Either export your calendar to an .ics file, or fill in the private ics adddress that GCalendar gives you.
+
+3. This project requires the following gems:
+ haml
+ icalendar
+
+4. Then:
+ $ cd thymer/
+ $ irb
+
+ >> require 'thymer.rb'
+ ./thymer.rb:14: warning: already initialized constant VERIFY_PEER
+ # This is OK, see code for explanation
+ >> Thymer.new.invoice("2009-07-23") # defaults to two weeks
+ # OR ALTERNATIVELY,
+ >> Thymer.new.invoice("2009-07-23", "2009-08-01")
+
+It will then process it against the template in /template, and produce a nice looking html file in the /output folder.
+
+I then open it up in Safari 4 and print to pdf. This last step is lame; if I ever have a large amount of time I'd like to change the template into either latex or proccess it using webkit2pdf (atm hard to compile on osx)
+
+= Story
+
+At the beginning of this summer I started a freelance contract for the very first time.
+
+I realised that I would have to keep track of my hours in some fashion, and goddamnit Google Calendar was just such an obvious interface. I realized some time later, though, that it's a huge pain in the ass to manually add up your hours come invoicing time (I later found out I under invoiced by $10 the first time around). 
+
+Naturally, I've probably spent more time on this project than invoicing would've taken me.
+

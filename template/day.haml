@@ -1,0 +1,12 @@
+.grid_16
+  %br/
+  #day
+    = day.date.strftime "%B %d"
+- day.tickets.each do |ticket|
+  .grid_9
+    #desc
+      = ticket.description
+  .grid_7
+    #time
+      = ticket.time/3600.0
+

@@ -1,0 +1,25 @@
+# The URI to your ical calendar; filenames or gcalendar private https urls
+:calendar_uri: https://www.google.com/calendar/ical/etc
+
+# Your info:
+:name: "Phillip Mendonça-Vieira"
+:contact: "(416) 555-5555 • phillmv@okayfail.com • 42 Adams Ave, M1A1A1 Toronto, ON"
+
+# Your client's info:
+:client_name: Awesome Client
+:client_contact: 192 Foobar Avenue, Suite 404, M1A1A1 Toronto, ON
+
+# How many dollars per hour do you charge?
+:unit_rate: 25
+
+# Are you paid a retainer? How many hrs/billing cycle?
+# If you think that this is something that could be handled better then 
+# you are correct! Comment these out if they don't apply to you.
+:discount_unit_rate: 20
+:discount_hours: 60
+
+# hahahaha oh MAN this is gross. This is a lambda for generating 6 digit 
+# SHA1s to serve as an unique invoice number. Change at your peril.
+# Used to make more sense back when this was a Ruby Hash named @variables
+:invoice_number:  lambda { SHA1.new("#{@variables[:name]}-#{@variables[:client_name]}:#{@variables[:start_date]}-#{@variables[:end_date]}").to_s[0..6] }
+
