@@ -8,6 +8,10 @@ I wrote this, but I still double check my results. You should too!
 
 Patches, bugs or ideas are welcome. 
 
+EDIT: This code is kind of gross. I am shocked to find that I still use this, mostly out of inertia. It currently suffers from a mild timezone bug, and I'm waiting to be viciously bit by some floating point bug because (drum roll) I am a fool. I am repulsed by the implications of that preceding sentence – so should you. 
+
+I suppose we are all doomed to become embarassed of our previous attempts at solving problems. I just can't be arsed to make this better because... it ain't broke. Programmers! Don't let your friends write their own financial apps.
+
 phillmv -at- okayfail.com
 
 == USAGE

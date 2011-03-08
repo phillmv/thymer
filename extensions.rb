@@ -7,8 +7,8 @@ class Day
 end
 
 class Ticket
-  attr_writer :description, :time
-  attr_reader :description, :time
+  attr_writer :description, :time, :hours
+  attr_reader :description, :time, :hours
 end
 
 class DateTime

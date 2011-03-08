@@ -1,3 +1,4 @@
+require 'rubygems'
 require 'icalendar'
 require 'haml'
 require 'sha1'
@@ -17,13 +18,15 @@ OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 class Thymer
   def initialize
     @date_list = Hash.new()
-    @template = Haml::Engine.new(File.read("template/template.haml"){ |io| io.read })
+    @ticket_list = Hash.new(0)
     @variables = YAML::load(open("config.yaml"))
+    @template = Haml::Engine.new(File.read(@variables[:template]){ |io| io.read })
     parse(@variables[:calendar_uri])
   end
 
   def invoice(date, end_date = nil)
     start_date = Date.parse(date)
+    end_date = Date.parse(end_date) unless end_date == nil
     end_date ||= start_date + 13
 
     @variables[:date] ||= Time.now.to_english
@@ -43,15 +46,29 @@ class Thymer
 
 	days_tickets.keys.each { |ticket|
 
+
 	  t = Ticket.new
-	  t.description = ticket.capitalize
+	  t.description = ticket
 
 	  t.time = days_tickets[ticket]
+	  t.hours = t.time / 3600.0
 	  @variables[:total_seconds] = @variables[:total_seconds] + t.time
+	  @ticket_list[ticket] = @ticket_list[ticket] + t.time
 	  day.tickets << t
 	}
       end
     }
+
+    @variables[:total_tickets] = []
+    @ticket_list.each_pair do |desc, qty|
+      t = Ticket.new
+      t.description = desc
+      t.time = qty
+      t.hours = t.time / 3600.0
+      @variables[:total_tickets] << t
+    end
+
+    @variables[:total_hours] = @variables[:total_seconds] / 3600
 
     puts "The following dates have been processed:"
     @variables[:days].each { |d| 
@@ -73,12 +90,15 @@ class Thymer
     else
       
       @variables[:discount_exists] = false
-      @variables[:total_cost] = @variables[:total_seconds] * @variables[:unit_rate]
-      puts "total cost: #{ @variables[:total_cost]/3600}"
+      @variables[:pre_vat_cost] = (@variables[:total_seconds] * @variables[:unit_rate]) / 3600.0
+      @variables[:vat_cost] = @variables[:pre_vat_cost] * @variables[:vat_rate]
+      @variables[:total_cost] = @variables[:pre_vat_cost] * (@variables[:vat_rate] + 1)
+
+      puts "total cost: #{ @variables[:total_cost]}"
     end
 
 
-    File.open("output/#{start_date.to_8601}_#{end_date.to_8601}.html", "w"){ |io| io.puts @template.render(Object.new, @variables) }
+    File.open("output/#{start_date.to_8601}_#{end_date.to_8601}.#{@variables[:template_suffix]}", "w"){ |io| io.puts @template.render(Object.new, @variables) }
     puts "Next invoice start date: #{(end_date+1).to_8601}"
 
   end
@@ -87,7 +107,7 @@ class Thymer
   # This is a static method because it gets called in the template; it's a 
   # holdover from before I wrapped this code into a class. Lame, I know. 
   # TODO:
-  # I should abstract this into a Module, or just handle it better period.
+  # Why did I write this in the first place? Should be deleted.
   def self.render_days(days)
     day_template = Haml::Engine.new(File.read("template/day.haml"){ |io| io.read })
     str = ""
@@ -120,11 +140,5 @@ class Thymer
   
 end
 
-#invoice("2009-04-30")
-#invoice("2009-05-14")
-#invoice("2009-05-28")
-#invoice("2009-06-11")
-#invoice("2009-06-25")
-#invoice("2009-07-09")
+Thymer.new.invoice("2011-02-21")
 
-#Thymer.new.invoice("2009-07-23")

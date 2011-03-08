@@ -15,11 +15,36 @@
 # Are you paid a retainer? How many hrs/billing cycle?
 # If you think that this is something that could be handled better then 
 # you are correct! Comment these out if they don't apply to you.
+# WARN: Now discouraged.
 :discount_unit_rate: 20
 :discount_hours: 60
+
+# Do you charge a sales tax like HST or VAT?
+:vat_rate: 0.13
+:vat_name: HST
+
+# template file that is going to be used
+:template: template/template.haml
+# soon to disappear
+:template_suffix: xml
+
+# the included freshbooks XML template uses this:
+:client_id: 1234
+:first_name: Foo
+:last_name: Bar
+:p_street1: 1234 Foobar
+:p_city: Toronto
+:p_state: Ontario
+:p_country: Canada
+:p_code: M1A1A1
 
 # hahahaha oh MAN this is gross. This is a lambda for generating 6 digit 
 # SHA1s to serve as an unique invoice number. Change at your peril.
 # Used to make more sense back when this was a Ruby Hash named @variables
 :invoice_number:  lambda { SHA1.new("#{@variables[:name]}-#{@variables[:client_name]}:#{@variables[:start_date]}-#{@variables[:end_date]}").to_s[0..6] }
+
+# Here is an example of yet another ridiculous, yet perhaps more useful
+#  lambda { `ls output|grep html|wc -l`.to_i + 1 }
+# Which increments a number depending on the number of invoices 
+# previously generated.
 

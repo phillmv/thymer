@@ -1,0 +1,23 @@
+%request{:method => "invoice.create"}
+  %invoice
+    %client_id= client_id
+    %number= invoice_number 
+    %status draft
+    %first_name= first_name
+    %last_name= last_name
+    %p_street1= p_street1
+    %p_city= p_city
+    %p_state= p_state
+    %p_country= p_country
+    %p_code= p_code
+
+    %lines
+      - total_tickets.each do |ticket|
+        %line
+          %name= ticket.description
+          %unit_cost= unit_rate
+          %quantity= ticket.hours
+          %tax1_name= vat_name
+          %tax1_percent= (vat_rate * 100).to_i
+
+

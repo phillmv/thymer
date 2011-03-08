@@ -46,11 +46,22 @@
       -# oh wow I forgot how lame this code was. This is an artifact from
       -# before this was object oriented. Oops.
 
-      = Thymer.render_days(days)
-
+      - days.each do |day|
+        .grid_16
+          %br/
+          #day
+            = day.date.strftime "%B %d"
+        - day.tickets.each do |ticket|
+          .grid_9
+            #desc
+              = ticket.description
+          .grid_7
+            #time
+              = ticket.hours
+        
       -# better off with a partial, oh well
       -# ALSO LAME: Man I should not be doing any calcs in the view.
-      -# Oh well for now.
+      -# Oh well for now. TODO: FIX
       - if discount_exists
         #total.grid_12
           .text
@@ -78,14 +89,18 @@
             %br/
             ="Units at $#{unit_rate}:"
             %br/
+            ="#{vat_name}:"
+            %br/
             Total cost:
 
         #total.grid_2
           .price
-            = total_seconds/3600.0
+            = total_hours
             %br/
-            = "#{total_seconds/3600.0}"
+            = "$#{pre_vat_cost}"
             %br/
-            = "$#{total_cost/3600.0}"
+            = "$#{vat_cost}"
+            %br/
+            = "$#{total_cost}"
 
 
